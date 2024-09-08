@@ -45,14 +45,15 @@ body {
   flex-direction: column;
 }
 
-.form-control > input {
+.form-control > input,
+.form-control > select,
+.form-control > button {
   padding: 0.8em 1em;
 }
 .form-control > input:focus {
   outline: none;
 }
 .form-control > button {
-  padding: 0.8em 1em;
   background-color: #3b28cc;
   border: none;
   color: white;
@@ -63,6 +64,10 @@ body {
 }
 .form-control > button:hover {
   background-color: #f17300;
+}
+
+.spinner {
+  max-width: 150px;
 }
 
 /* media query */
