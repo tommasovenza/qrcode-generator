@@ -9,7 +9,7 @@
 }
 
 /* Images Reset */
-img {
+.right > img {
   display: block;
   width: 100%;
 }
@@ -55,14 +55,32 @@ body {
 }
 .form-control > button {
   background-color: #3b28cc;
-  border: none;
   color: white;
-  font-weight: semibold;
+  border: none;
   border-radius: 0.2em;
   font-family: "Poppins", sans-serif;
+  font-weight: semibold;
   cursor: pointer;
 }
-.form-control > button:hover {
+
+.btn {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  background-color: #3b28cc;
+  color: white;
+  border: none;
+  border-radius: 0.2em;
+  cursor: pointer;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+}
+
+.form-control > button:hover,
+.btn:hover {
   background-color: #f17300;
 }
 
@@ -72,18 +90,15 @@ body {
 
 /* media query */
 @media (min-width: 200px) {
-  img {
+  .right > img {
     width: 200px;
   }
 }
 @media (min-width: 700px) {
-  img {
-    width: 250px;
+  .right > img {
+    width: 300px;
   }
   .container {
     flex-direction: row;
-  }
-  .container > .left {
-    max-width: 600px;
   }
 }

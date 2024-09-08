@@ -19,8 +19,6 @@
       <header class="header" id="header">QR Code Generator</header>
 
       <main>
-        <div id="qrcode"></div>
-
         <div class="container">
           <div class="left">
             <h1>QR Code Generator</h1>
@@ -42,7 +40,7 @@
                 <select class="select-size" id="select-size">
                   <option value="100">100x100</option>
                   <option value="200">200x200</option>
-                  <option value="300">300x300</option>
+                  <option value="300" selected>300x300</option>
                   <option value="400">400x400</option>
                   <option value="500">500x500</option>
                   <option value="600">600x600</option>
@@ -52,13 +50,15 @@
 
               <!-- Form Control URL -->
               <div class="form-control">
-                <button type="submit" id="generate-btn">Generate</button>
+                <button type="submit" id="generate-btn">
+                  Generate QR Code
+                </button>
               </div>
             </form>
             <!-- Spinner -->
             <div class="spinner" id="spinner"></div>
             <!-- Print QR Code -->
-            <div id="generated"></div>
+            <div id="qrcode"></div>
           </div>
           <div class="right">
             <img src="img/qr-code-blue.svg" alt="qr code" />

@@ -1,11 +1,44 @@
 // get things
-const inputUrl = document.querySelector("#input-url")
-const generateBtn = document.querySelector("#generate-btn")
-const selectSize = document.querySelector("#select-size")
-const printQRCode = document.querySelector("#qrcode")
-const generated = document.querySelector("#generated")
 const form = document.querySelector("#form")
+const inputUrl = document.querySelector("#input-url")
+const selectSize = document.querySelector("#select-size")
+const generateBtn = document.querySelector("#generate-btn")
+// Output QR Code
+const printQRCode = document.querySelector("#qrcode")
 
+function handleFormSubmit(e) {
+  // Prevent Form Submission
+  e.preventDefault()
+  // Clean UI
+  cleanUI()
+  // Getting Values
+  const url = inputUrl.value
+  const size = selectSize.value
+
+  if (url === "") {
+    alert("please insert a url")
+    return
+  }
+
+  // Show Spinner Animation
+  showSpinner()
+
+  setTimeout(() => {
+    // Remove Spinner Animation
+    removeSpinner()
+    // Create QR Code
+    generateQRCode(url, size)
+
+    setTimeout(() => {
+      // Get save url
+      const saveUrl = printQRCode.querySelector("img").src
+      // Create Download Link
+      createDownloadLink(saveUrl)
+    }, 50)
+  }, 1000)
+}
+
+// Generate QRCode and append it into its area
 function generateQRCode(url, size) {
   const qrcode = new QRCode(printQRCode, {
     text: url,
@@ -14,56 +47,33 @@ function generateQRCode(url, size) {
   })
 }
 
+// Append a Link for Downloading QRCode
 function createDownloadLink(url) {
-  const printedQRCode = document.querySelector("#qrcode")
-  const image = printedQRCode.querySelector("img")
+  const image = printQRCode.querySelector("img")
   const link = document.createElement("a")
   link.id = "download-link"
-  link.style =
-    "background-color: #3b28cc; border: none; color: white; font-weight: semibold; border-radius: 0.2em; cursor: pointer; font-family: Poppins, sans-serif; text-decoration: none; width: 100%; padding: 0.5em 1em; margin: 1em 0; display: block; text-align:center"
+  link.className = "btn donwload-link"
   link.href = url
-  link.src = image.src
   link.innerHTML = "Save QR Code"
-  link.download = "qrcode.png"
-  generated.appendChild(link)
+  link.download = "qrcode"
+  printQRCode.insertAdjacentElement("afterend", link)
 }
 
-function handleFormSubmit(e) {
-  e.preventDefault()
-  cleanUI()
-  console.log("generate")
-
-  const url = inputUrl.value
-  const size = selectSize.value
-
-  showSpinner()
-
-  setTimeout(() => {
-    removeSpinner()
-    generateQRCode(url, size)
-    generated.appendChild(qrcode)
-
-    setTimeout(() => {
-      // Get save url
-      const saveUrl = printQRCode.querySelector("canvas").toDataURL()
-      createDownloadLink(saveUrl)
-    }, 500)
-  }, 1000)
-}
-
+// Helpers Function
 function showSpinner() {
   const spinner = document.querySelector("#spinner")
   spinner.classList.add("show")
 }
-
 function removeSpinner() {
   const spinner = document.querySelector("#spinner")
   spinner.classList.remove("show")
 }
-
 function cleanUI() {
-  const outputQRcode = document.querySelector("#qrcode")
-  outputQRcode.innerHTML = ""
+  printQRCode.innerHTML = ""
+  const link = document.querySelector("#download-link")
+  if (link) {
+    link.remove()
+  }
 }
 
 // event listener
